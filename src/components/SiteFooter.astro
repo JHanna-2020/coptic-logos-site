@@ -1,7 +1,8 @@
 ---
 import SignupForm from './SignupForm.astro';
+import { CONTACT_EMAIL } from '../config';
 
-const contact = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'hello@copticlogos.app';
+const contact = CONTACT_EMAIL;
 const year = new Date().getFullYear();
 ---
 

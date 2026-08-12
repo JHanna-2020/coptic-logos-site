@@ -1,5 +1,7 @@
 ---
-const contact = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'hello@copticlogos.app';
+import { CONTACT_EMAIL } from '../config';
+
+const contact = CONTACT_EMAIL;
 
 const rules = [
   ['It ends.', 'One clip for the day. When it is watched, the app says so and there is nothing more to pull down.'],

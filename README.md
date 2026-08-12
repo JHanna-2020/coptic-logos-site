@@ -93,7 +93,12 @@ Moving to a custom domain later:
 
 ## The signup form
 
-There is no backend. Copy `.env.example` to `.env` and point
+Public site constants live in `src/config.ts`, which is **committed on
+purpose**: `.env` is gitignored, so a value that lives only there is missing
+when GitHub Actions builds, and the site would publish a placeholder. The
+contact email is there.
+
+There is no backend for the form. Copy `.env.example` to `.env` and point
 `PUBLIC_SIGNUP_ENDPOINT` at any service that accepts a plain form POST —
 [Buttondown](https://buttondown.email) for a real mailing list,
 [Formspree](https://formspree.io) if you just want the addresses.
@@ -106,9 +111,11 @@ never an API key.
 
 ## Before sharing the link widely
 
-- [ ] Set `PUBLIC_CONTACT_EMAIL` to an address you actually read — the
-      contributor button is a `mailto:` and currently points at a placeholder
-- [ ] Wire up `PUBLIC_SIGNUP_ENDPOINT`
+- [ ] Wire up `PUBLIC_SIGNUP_ENDPOINT` — both locally in `.env` **and** as an
+      Actions variable in GitHub, or the deployed form stays a `mailto:` link
+- [ ] Consider a forwarding alias instead of the personal Gmail in
+      `src/config.ts`. It is published in plain text on a public page, so it
+      will be scraped; an alias can be rotated, a personal address cannot
 - [ ] Add an Open Graph image (`og:image` is declared but has no file yet).
       This is what previews when the link is pasted into WhatsApp or Messenger
 - [ ] Publish a privacy policy and link it from the footer — required once you

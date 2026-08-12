@@ -5,8 +5,10 @@ interface Props {
 
 const { id } = Astro.props;
 
-const endpoint = import.meta.env.PUBLIC_SIGNUP_ENDPOINT;
-const contact = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'hello@copticlogos.app';
+import { CONTACT_EMAIL, SIGNUP_ENDPOINT } from '../config';
+
+const endpoint = SIGNUP_ENDPOINT;
+const contact = CONTACT_EMAIL;
 ---
 
 {
