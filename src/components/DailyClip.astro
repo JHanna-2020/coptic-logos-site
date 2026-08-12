@@ -1,0 +1,186 @@
+---
+const contact = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'hello@copticlogos.app';
+
+const rules = [
+  ['It ends.', 'One clip for the day. When it is watched, the app says so and there is nothing more to pull down.'],
+  ['Nothing plays by itself.', 'No autoplay, no next video, no queue. Watching a second clip takes a deliberate choice.'],
+  ['It points back to you.', 'Every clip carries your name, title and parish, and links to the full recording on your own channel.'],
+];
+
+const youKeep = [
+  'Approval of every clip before it is published, in the edit you will actually see.',
+  'The right to withdraw anything at any time, without giving a reason. It comes out of the app within a day.',
+  'Your name, clerical title, parish and diocese shown on every clip.',
+  'A link from every clip to the complete sermon on your own channel.',
+  'Your words labelled for what they are — Church teaching, or personal reflection — never blurred together.',
+  'No advertising sold against your words. There is no advertising in the app at all in the first version.',
+];
+
+const iWouldAsk = [
+  'Permission to use a few minutes from recordings you have already published.',
+  'Permission to add English subtitles, and later an Arabic translation, both sent to you before anything goes out.',
+  'The blessing of your diocese, in writing, alongside your own.',
+  'A short written agreement, so that all of the above is on paper rather than on trust, and so you can point to it if you ever want the material back.',
+];
+---
+
+<section class="section section--ruled" aria-labelledby="clip-heading">
+  <div class="shell">
+    <p class="eyebrow">For clergy and contributors</p>
+    <h2 class="h2" id="clip-heading">One clip a day.</h2>
+    <p class="lede">
+      Not a feed. One short clip, chosen for where the day falls in the Church's
+      calendar, sitting beside the day's prayer and reading. Young people in the
+      diaspora already spend their attention on short video. The aim is to spend
+      ninety seconds of it well and then stop.
+    </p>
+
+    <ul class="rules">
+      {
+        rules.map(([name, body]) => (
+          <li class="rule">
+            <h3 class="rule__name">{name}</h3>
+            <p class="rule__body">{body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="terms">
+      <div class="terms__card terms__card--keep">
+        <h3 class="terms__title">What you keep</h3>
+        <ul class="terms__list">
+          {youKeep.map((item) => <li class="terms__item">{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="terms__card">
+        <h3 class="terms__title">What I would ask</h3>
+        <ul class="terms__list">
+          {iWouldAsk.map((item) => <li class="terms__item">{item}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <p class="clip__note">
+      Until an agreement is in place with the speaker, the daily clip is simply
+      a link: the app shows what it is and why it was chosen for today, and
+      opens the original on the speaker's own channel. Nothing is copied, hosted
+      or edited without written permission first.
+    </p>
+
+    <p class="clip__contact">
+      <a class="button button--quiet" href={`mailto:${contact}?subject=Coptic%20Logos%20%E2%80%94%20contributing`}>
+        Talk to me about contributing
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .rules {
+    list-style: none;
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 clamp(2.5rem, 6vw, 3.5rem);
+    padding: 0;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .rule {
+    padding-top: 1rem;
+    border-top: 1px solid var(--verdigris);
+  }
+
+  .rule__name {
+    margin: 0 0 0.45rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.15rem;
+    color: var(--verdigris);
+  }
+
+  .rule__body {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.66;
+    color: var(--linen-soft);
+  }
+
+  .terms {
+    display: grid;
+    gap: 1px;
+    background: var(--night-line);
+    border: 1px solid var(--night-line);
+  }
+
+  .terms__card {
+    background: var(--night);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .terms__card--keep {
+    box-shadow: inset 0 2px 0 var(--verdigris);
+  }
+
+  .terms__title {
+    margin: 0 0 1.15rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+
+  .terms__card--keep .terms__title {
+    color: var(--verdigris);
+  }
+
+  .terms__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .terms__item {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: 0.95rem;
+    line-height: 1.62;
+    color: var(--linen-soft);
+  }
+
+  .terms__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.35rem;
+    height: 1px;
+    background: var(--linen-faint);
+  }
+
+  .clip__note {
+    margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+    max-width: 44rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--linen-faint);
+  }
+
+  .clip__contact {
+    margin: 2rem 0 0;
+  }
+
+  @media (min-width: 46rem) {
+    .rules {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+  }
+
+  @media (min-width: 58rem) {
+    .terms {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

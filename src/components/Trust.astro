@@ -1,0 +1,72 @@
+---
+const commitments = [
+  {
+    heading: 'It is not official, and it says so',
+    body: "Coptic Logos is an independent project. It is not published, endorsed, or authorised by the Coptic Orthodox Church, and it will not describe itself as such unless that authorisation is one day given in writing.",
+  },
+  {
+    heading: 'Nothing is published without permission',
+    body: 'No sermon, hymn, icon, or photograph will appear in the app without written permission from whoever holds the rights to it. Clergy content additionally requires the blessing of the priest and his diocese, and either can withdraw it at any time.',
+  },
+  {
+    heading: 'Reflection is labelled as reflection',
+    body: "Anything that eventually appears in the app will be marked as one of three things: the Church's own liturgical or Scriptural text, settled Church teaching, or one person's personal reflection. The third is the one most often mistaken for the second.",
+  },
+  {
+    heading: 'Your practice stays on your phone',
+    body: 'Habits, reading progress, and journal entries are stored on your device. There is no account, no server copy, and nothing to breach. You can export everything as plain text or delete all of it in one tap.',
+  },
+];
+---
+
+<section class="section section--ruled" aria-labelledby="trust-heading">
+  <div class="shell">
+    <p class="eyebrow">How it is being built</p>
+    <h2 class="h2" id="trust-heading">Trust is the whole product.</h2>
+    <p class="lede">
+      An app that sits beside someone's prayer has to be careful about what it
+      claims and whose words it carries. These are commitments, made before
+      launch rather than after a complaint.
+    </p>
+
+    <dl class="commitments">
+      {
+        commitments.map((item) => (
+          <div class="commitment">
+            <dt class="commitment__heading">{item.heading}</dt>
+            <dd class="commitment__body">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .commitments {
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .commitment {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--verdigris);
+  }
+
+  .commitment__heading {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.35;
+  }
+
+  .commitment__body {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.68;
+    color: var(--linen-soft);
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+const features = [
+  {
+    name: 'Today',
+    body: "One screen, one next thing. The Coptic date, the fast or feast you are in, one short clip chosen for the day, and the single practice you have set for this morning — not a dashboard of everything you are behind on.",
+  },
+  {
+    name: 'Prayer timer',
+    body: 'Set a length, put the phone down, pray. The screen stays awake, the timer survives a locked phone, and nothing interrupts it. No notification, no sound, no advertisement.',
+  },
+  {
+    name: 'Scripture',
+    body: "Mark chapters as you read them and pick up where you stopped. The full Orthodox canon, including the books most reading apps leave out. Opens whichever Bible app you already use.",
+  },
+  {
+    name: 'Journal',
+    body: 'A private place for reflections and the people you are praying for. Stored on your phone, locked behind Face ID, never uploaded, never read, never analysed.',
+  },
+];
+---
+
+<section class="section section--ruled" aria-labelledby="first-heading">
+  <div class="shell">
+    <p class="eyebrow">In the first version</p>
+    <h2 class="h2" id="first-heading">Four things, done properly.</h2>
+    <p class="lede">
+      There is no feed. A single clip a day sits on the Today screen beside the
+      prayer and the reading, and until there is written permission to carry a
+      speaker's work in the app, that clip opens their own recording on their
+      own channel.
+    </p>
+
+    <ul class="features">
+      {
+        features.map((feature) => (
+          <li class="feature">
+            <h3 class="feature__name">{feature.name}</h3>
+            <p class="feature__body">{feature.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .features {
+    list-style: none;
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    /* Explicit 2x2 rather than auto-fit: four items in an auto-fit track leave
+       a dead cell at three columns, and 2x2 gives the copy room to breathe. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+    background: var(--night-line);
+    border: 1px solid var(--night-line);
+  }
+
+  @media (min-width: 46rem) {
+    .features {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .feature {
+    background: var(--night);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .feature__name {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--saffron);
+  }
+
+  .feature__body {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.68;
+    color: var(--linen-soft);
+  }
+</style>

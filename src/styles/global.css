@@ -1,0 +1,218 @@
+/* Fonts are self-hosted rather than pulled from Google's CDN. An app whose
+   pitch is "your data stays on your phone" should not leak its visitors to a
+   third party on page load.
+
+   Cardo also ships Greek, Hebrew, Gothic, Runic and Old Italic subsets, so we
+   import the latin ones by name and those never reach the build. */
+@import '@fontsource/marcellus/latin-400.css';
+@import '@fontsource/cardo/latin-400.css';
+@import '@fontsource/cardo/latin-400-italic.css';
+@import '@fontsource/cardo/latin-700.css';
+@import '@fontsource/noto-sans-coptic/coptic-400.css';
+
+:root {
+  /* Palette drawn from Coptic material culture: the indigo-black of manuscript
+     ink, undyed linen, madder red and saffron from Akhmim tapestry dyes, and
+     the verdigris green of illuminated borders. */
+  --night: #17122a;
+  --night-raised: #1f1838;
+  --night-line: #2e2450;
+  --linen: #e9e0cc;
+  --linen-soft: #b6ab96;
+  /* 4.9:1 on --night. Small print still has to pass WCAG AA. */
+  --linen-faint: #8b82a0;
+  --madder: #c24b36;
+  --saffron: #dca646;
+  --verdigris: #56897a;
+
+  --font-display: 'Marcellus', 'Times New Roman', serif;
+  --font-body: 'Cardo', Georgia, serif;
+  --font-coptic: 'Noto Sans Coptic', 'Marcellus', serif;
+
+  --measure: 34rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --section-gap: clamp(4.5rem, 11vw, 9rem);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--linen);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* A single faint wash so the deep ground is not flat. Fixed, so it reads as
+   ambient light rather than as a decorative blob that scrolls past. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(60rem 40rem at 78% -8%, rgba(220, 166, 70, 0.09), transparent 62%),
+    radial-gradient(48rem 34rem at 4% 18%, rgba(86, 137, 122, 0.07), transparent 60%);
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+.shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-gap);
+}
+
+.section--ruled {
+  border-top: 1px solid var(--night-line);
+}
+
+/* ---- type ---- */
+
+.eyebrow {
+  margin: 0 0 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--linen-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: var(--saffron);
+  flex: none;
+}
+
+.h2 {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: clamp(1.0625rem, 1.9vw, 1.2rem);
+  color: var(--linen-soft);
+}
+
+.coptic {
+  font-family: var(--font-coptic);
+  letter-spacing: 0.12em;
+}
+
+/* ---- controls ---- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--saffron);
+  border-radius: 2rem;
+  background: var(--saffron);
+  color: #1a1204;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--saffron);
+}
+
+.button--quiet {
+  background: transparent;
+  border-color: var(--night-line);
+  color: var(--linen);
+  font-weight: 400;
+}
+
+.button--quiet:hover {
+  border-color: var(--linen-soft);
+  background: transparent;
+  color: var(--linen);
+}
+
+:where(a, button, input, summary):focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 20;
+  padding: 0.75rem 1.25rem;
+  background: var(--saffron);
+  color: #1a1204;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

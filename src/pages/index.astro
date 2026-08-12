@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import YearGrid from '../components/YearGrid.astro';
+import FirstVersion from '../components/FirstVersion.astro';
+import DailyClip from '../components/DailyClip.astro';
+import Refusals from '../components/Refusals.astro';
+import Trust from '../components/Trust.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Base
+  title="Coptic Logos — a quiet daily prayer companion"
+  description="A daily prayer and Scripture companion for Coptic Orthodox Christians. One short clip a day, the Church's calendar, and a quiet place to keep your rule. No streaks, no feed, no advertising. Join the TestFlight beta."
+>
+  <SiteHeader />
+  <main id="main">
+    <Hero />
+    <YearGrid />
+    <FirstVersion />
+    <DailyClip />
+    <Refusals />
+    <Trust />
+    <SiteFooter />
+  </main>
+</Base>

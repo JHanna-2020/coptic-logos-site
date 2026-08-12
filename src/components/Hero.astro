@@ -1,0 +1,71 @@
+---
+import SignupForm from './SignupForm.astro';
+import { toCoptic, formatCoptic, formatGregorian } from '../lib/coptic';
+
+const now = new Date();
+const coptic = toCoptic(now);
+---
+
+<section class="hero">
+  <div class="shell">
+    <p class="today">
+      <span class="today__gregorian">{formatGregorian(now)}</span>
+      <span class="today__coptic">{formatCoptic(coptic)}</span>
+    </p>
+
+    <h1 class="hero__title">Begin<br />again.</h1>
+
+    <p class="hero__lede">
+      A daily prayer and Scripture companion for Coptic Orthodox Christians.
+      It keeps the Church's calendar, holds your rule quietly, and never counts
+      your failures back to you.
+    </p>
+
+    <SignupForm id="join" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 9vw, 6.5rem) clamp(3.5rem, 9vw, 7rem);
+  }
+
+  .today {
+    margin: 0 0 clamp(2rem, 5vw, 3.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .today__gregorian {
+    font-size: 0.76rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--linen-faint);
+  }
+
+  .today__coptic {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: var(--saffron);
+    letter-spacing: 0.02em;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(4rem, 17vw, 11rem);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    text-indent: -0.06em; /* optical alignment: pull the B off the margin */
+  }
+
+  .hero__lede {
+    margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+    max-width: 30rem;
+    font-size: clamp(1.1rem, 2.1vw, 1.3rem);
+    line-height: 1.62;
+    color: var(--linen-soft);
+  }
+</style>

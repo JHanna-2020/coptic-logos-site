@@ -1,0 +1,59 @@
+---
+// Not "/" — on GitHub Pages the site lives under a subpath, and BASE_URL is
+// what Astro resolves that to.
+const home = import.meta.env.BASE_URL;
+---
+
+<header class="header">
+  <div class="shell header__inner">
+    <a class="wordmark" href={home}>
+      <span class="wordmark__name">Coptic Logos</span>
+      <span class="wordmark__coptic coptic" aria-hidden="true">ⲗⲟⲅⲟⲥ</span>
+    </a>
+    <a class="button button--quiet header__cta" href="#join">Join the beta</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding-block: 1.5rem;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--linen);
+  }
+
+  .wordmark__name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+  }
+
+  .wordmark__coptic {
+    font-size: 1rem;
+    color: var(--saffron);
+    opacity: 0.75;
+  }
+
+  .header__cta {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 26rem) {
+    .wordmark__coptic {
+      display: none;
+    }
+  }
+</style>

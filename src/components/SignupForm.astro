@@ -1,0 +1,113 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const endpoint = import.meta.env.PUBLIC_SIGNUP_ENDPOINT;
+const contact = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'hello@copticlogos.app';
+---
+
+{
+  endpoint ? (
+    <form class="signup" id={id} method="POST" action={endpoint}>
+      <label class="visually-hidden" for="email">
+        Email address
+      </label>
+      <input
+        class="signup__input"
+        id="email"
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="you@example.com"
+      />
+      <button class="button" type="submit">
+        Join the beta
+      </button>
+      <p class="signup__note" data-signup-note>
+        TestFlight invites go out when the first version is ready. That is the
+        only reason you will hear from me.
+      </p>
+    </form>
+  ) : (
+    <div class="signup" id={id}>
+      <a class="button" href={`mailto:${contact}?subject=Coptic%20Logos%20beta`}>
+        Ask for a beta invite
+      </a>
+      <p class="signup__note">
+        TestFlight invites go out when the first version is ready. That is the
+        only reason you will hear from me.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  // Progressive enhancement only: the form posts and works fine without this.
+  const form = document.querySelector<HTMLFormElement>('form.signup');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const note = form.querySelector<HTMLElement>('[data-signup-note]');
+    const button = form.querySelector('button');
+    if (button) button.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      form.querySelector('input')?.remove();
+      button?.remove();
+      if (note) note.textContent = 'Thank you. You are on the list.';
+    } catch {
+      if (button) button.disabled = false;
+      if (note)
+        note.textContent =
+          'That did not go through. Try again, or email me directly.';
+    }
+  });
+</script>
+
+<style>
+  .signup {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+    max-width: var(--measure);
+  }
+
+  .signup__input {
+    flex: 1 1 15rem;
+    min-width: 0;
+    padding: 0.85rem 1.15rem;
+    border: 1px solid var(--night-line);
+    border-radius: 2rem;
+    background: var(--night-raised);
+    color: var(--linen);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .signup__input::placeholder {
+    color: var(--linen-faint);
+  }
+
+  .signup__input:hover {
+    border-color: var(--linen-faint);
+  }
+
+  .signup__note {
+    flex: 1 0 100%;
+    margin: 0.35rem 0 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--linen-faint);
+  }
+</style>

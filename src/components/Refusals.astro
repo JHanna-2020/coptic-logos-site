@@ -1,0 +1,112 @@
+---
+const refusals = [
+  ['No streaks to break', 'Miss four days and nothing is lost. The app counts days practised in the last thirty, so returning costs you one day, not everything.'],
+  ['No leaderboards', 'Your prayer is not ranked against anyone. There is no one to compare yourself to, because there is no one else in your app.'],
+  ['No endless feed', 'One clip a day, and then the app tells you that you are done. Nothing plays by itself, there is no next video, and browsing further is a deliberate choice you have to make.'],
+  ['No advertising in prayer', 'No advertising in the first version at all — and never inside the prayer timer, Scripture reading, hymns, or the journal. Not later, not for a sponsor.'],
+  ['No AI giving spiritual counsel', 'A language model will not answer theological questions, interpret Scripture, or comment on what you write. Your father of confession is not a chatbot.'],
+  ['No account, no tracking', 'Nothing to sign up for. No analytics on what you pray, read, or write. There is no server holding your journal because your journal never leaves your phone.'],
+];
+---
+
+<section class="section section--ruled" aria-labelledby="refusals-heading">
+  <div class="shell refusals__shell">
+    <div class="refusals__intro">
+      <p class="eyebrow">The rule of the app</p>
+      <h2 class="h2" id="refusals-heading">What it will never do.</h2>
+      <p class="lede">
+        Most habit apps borrow their mechanics from slot machines. That is a
+        strange thing to point at prayer. These are constraints on the product,
+        written down so they are harder to quietly abandon later.
+      </p>
+    </div>
+
+    <ul class="refusals">
+      {
+        refusals.map(([name, body]) => (
+          <li class="refusal">
+            <span class="refusal__mark" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
+              </svg>
+            </span>
+            <div>
+              <h3 class="refusal__name">{name}</h3>
+              <p class="refusal__body">{body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .refusals__shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .refusals {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .refusal {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--night-line);
+  }
+
+  .refusal:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .refusal__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.15rem;
+    border: 1px solid var(--madder);
+    border-radius: 50%;
+    color: var(--madder);
+    flex: none;
+  }
+
+  .refusal__name {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .refusal__body {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.68;
+    color: var(--linen-soft);
+  }
+
+  @media (min-width: 60rem) {
+    .refusals__shell {
+      grid-template-columns: 22rem minmax(0, 1fr);
+      align-items: start;
+      gap: clamp(3rem, 7vw, 6rem);
+    }
+
+    .refusals {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.6rem clamp(2rem, 4vw, 3.5rem);
+    }
+  }
+</style>
